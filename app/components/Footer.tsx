@@ -1,5 +1,6 @@
 import Link from "next/link";
-// import Logo from "./Logo";
+import logo2 from "../../public/images/logo2.png"
+import Image from "next/image";
 
 const quickLinks = [
   { href: "/projects", label: "Projects" },
@@ -10,12 +11,14 @@ const quickLinks = [
 export default function Footer() {
   return (
     <footer className="bg-[#9B511F] text-white">
-      <div className="mx-auto max-w-3xl px-6 py-16 text-center">
-        {/* <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-xl bg-white shadow-sm">
-          <Logo />
-        </div> */}
+      <div className="mx-auto max-w-[90%] px-6 py-16 text-center">
+         <div className="flex justify-center">
+          <Link href={"/"} className="shrink-0" aria-label="Cyntonisca home">
+            <Image src={logo2} alt="logo" className="w-[56px] h-[56px]" />
+          </Link>
+         </div>
 
-        <p className="mt-8 text-xs font-medium tracking-[0.2em] text-white/70">
+        <p className="mt-8 text-[20px] font-medium text-[#FAFAFA]">
           QUICK LINKS
         </p>
 
@@ -34,7 +37,7 @@ export default function Footer() {
 
         <div className="mx-auto mt-8 h-px w-full bg-white/20" />
 
-        <p className="mt-6 text-sm text-white/70">
+        <p className="mt-6 text-sm text-[#BDBDBD]">
           © Cyntonisca, {new Date().getFullYear()}. All Rights Reserved.
         </p>
       </div>

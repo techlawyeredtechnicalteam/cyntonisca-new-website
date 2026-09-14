@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import about from "../../public/images/about.jpg"
+import Image from "next/image";
 
 type TeamMember = {
   name: string;
@@ -145,13 +147,30 @@ export default function AboutSections() {
 
   useEffect(() => {
     scrollToTestimonial(testimonialIndex, "auto");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="bg-[#F1F1F1] text-black">
-      {/* Who We Are */}
-      <section className="mx-auto max-w-[90%] px-6 py-20 md:px-10">
+      <section className="relative flex flex-col items-center justify-center min-h-[400px] w-full overflow-hidden">
+        <Image
+          src={about}
+          alt="about"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+
+        <div className="absolute inset-0 bg-[rgba(28,20,14,0.55)]"></div>
+        <div className="relative z-10 mx-auto max-w-[50%] px-6 py-12 text-center text-white">
+          <p className="mb-3 text-base text-white/90">About us</p>
+          <h1 className="mb-5 font-serif text-4xl leading-tight sm:text-5xl md:text-6xl">
+            Bridging Law and Tech
+          </h1>
+          <p className="text-base leading-relaxed text-white/85">
+            Founded by legal technology enthusiasts, we understand the unique challenges law firms face in today's digital age. Our mission is to revolutionize the legal industry in Nigeria with tailored tech solutions.
+          </p>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-[95%] px-6 py-20 md:px-10">
         <div className="grid gap-12 md:grid-cols-2 md:items-center">
           <div className="relative h-[420px] w-full max-w-[420px]">
             <div className="absolute left-0 top-6 h-[240px] w-[190px] border-l-4 border-[#9B511F] bg-white p-1">
@@ -215,8 +234,7 @@ export default function AboutSections() {
         </div>
       </section>
 
-      {/* Meet the Team */}
-      <section className="mx-auto max-w-[90%] px-6 pb-20 md:px-10">
+      <section className="mx-auto max-w-[95%] px-6 pb-20 md:px-10">
         <div className="flex items-end justify-between">
           <div>
             <p className="text-sm font-medium text-black">Meet the Team</p>
@@ -274,8 +292,7 @@ export default function AboutSections() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="mx-auto max-w-[90%] px-6 pb-24 md:px-10">
+      <section className="mx-auto max-w-[95%] px-6 pb-24 md:px-10">
         <div className="text-center">
           <p className="text-sm font-medium text-black">What our Clients say</p>
           <h2 className="mt-3 font-serif text-3xl text-black md:text-4xl">
@@ -291,11 +308,10 @@ export default function AboutSections() {
                 key={t.name}
                 onClick={() => setActiveTestimonial(i)}
                 aria-label={`Show testimonial from ${t.name}`}
-                className={`shrink-0 overflow-hidden rounded-lg border-2 transition-all ${
-                  isActive
-                    ? "h-40 w-40 border-[#9B511F]"
-                    : "h-24 w-24 border-transparent"
-                }`}
+                className={`shrink-0 overflow-hidden rounded-lg border-2 transition-all ${isActive
+                  ? "h-40 w-40 border-[#9B511F]"
+                  : "h-24 w-24 border-transparent"
+                  }`}
               >
                 <img
                   src={t.avatar}
@@ -335,7 +351,7 @@ export default function AboutSections() {
                       className={
                         s < t.rating
                           ? "fill-[#F2B237] text-[#F2B237]"
-                          : "fill-gray-200 text-gray-200"
+                          : "fill-gray-200 text-black"
                       }
                     />
                   ))}

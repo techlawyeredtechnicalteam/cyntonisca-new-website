@@ -73,7 +73,7 @@ export default function ContactPage() {
       </section>
 
       <section className="bg-[#F1F1F1] py-20">
-        <div className="mx-auto max-w-[90%] px-6 md:px-10">
+        <div className="mx-auto max-w-[95%] px-6 md:px-10">
           <div className="grid gap-10 md:grid-cols-2">
             <div>
               <p className="text-sm font-medium tracking-wide text-black">

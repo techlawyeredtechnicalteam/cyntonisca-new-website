@@ -4,7 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-// import Logo from "./Logo";
+import logo from "../../public/images/logo.png"
+import Image from "next/image";
 
 const links = [
   { href: "/", label: "Home" },
@@ -14,49 +15,45 @@ const links = [
   { href: "/about", label: "About Us" },
 ];
 
-export default function Navbar({
-  ctaVariant = "outline",
-}: {
-  ctaVariant?: "outline" | "solid";
-}) {
+export default function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const isContactActive = pathname === "/contact";
 
   return (
     <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur">
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3 md:px-10">
-        {/* <Link href="/" className="shrink-0" aria-label="Cyntonisca home">
-          <Logo />
-        </Link> */}
+      <nav className="mx-auto flex max-w-[95%] items-center justify-between px-6 py-3 md:px-10">
+        <div className="flex gap-5">
+          <Link href={"/"} className="shrink-0" aria-label="Cyntonisca home">
+            <Image src={logo} alt="logo" className="w-[56px] h-[56px]" />
+          </Link>
 
-        <ul className="hidden items-center gap-9 md:flex">
-          {links.map((link) => {
-            const active = pathname === link.href;
-            return (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className={`relative pb-1 text-[15px] transition-colors ${
-                    active
-                      ? "rounded-[3px] border-b-2 border-[#9B511F] text-[#9B511F]"
-                      : "text-black"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+          <ul className="hidden items-center gap-9 md:flex">
+            {links.map((link) => {
+              const active = pathname === link.href;
+              return (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className={`relative pb-1 text-[15px] transition-colors ${active
+                        ? "rounded-[3px] border-b-2 border-[#9B511F] text-[#9B511F]"
+                        : "text-black"
+                      }`}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
 
         <Link
           href="/contact"
-          className={`hidden shrink-0 rounded-md px-6 py-2.5 text-[15px] font-medium transition-colors md:inline-block ${
-            isContactActive
+          className={`hidden shrink-0 rounded-md px-6 py-2 text-[15px] font-medium transition-colors md:inline-block ${isContactActive
               ? "bg-[#9B511F] text-white"
               : "border border-[#9B511F] text-[#9B511F]"
-          }`}
+            }`}
         >
           Contact
         </Link>
@@ -80,9 +77,8 @@ export default function Navbar({
                   <Link
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className={`text-[15px] ${
-                      active ? "text-[#9B511F]" : "text-black/80"
-                    }`}
+                    className={`text-[15px] ${active ? "text-[#9B511F]" : "text-black/80"
+                      }`}
                   >
                     {link.label}
                   </Link>
