@@ -3,7 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import about from "../../public/images/about.jpg"
+import innovation from "../../public/images/innovation.png"
 import Image from "next/image";
+import Link from "next/link";
 
 type TeamMember = {
   name: string;
@@ -172,51 +174,33 @@ export default function AboutSections() {
 
       <section className="mx-auto max-w-[95%] px-6 py-20 md:px-10">
         <div className="grid gap-12 md:grid-cols-2 md:items-center">
-          <div className="relative h-[420px] w-full max-w-[420px]">
-            <div className="absolute left-0 top-6 h-[240px] w-[190px] border-l-4 border-[#9B511F] bg-white p-1">
-              <img
-                src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&w=400&q=80"
-                alt="Team members"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="absolute left-[140px] top-0 h-[280px] w-[190px] bg-white p-1 shadow-sm">
-              <img
-                src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80"
-                alt="Team member"
-                className="h-full w-full object-cover"
-              />
-            </div>
-            <div className="absolute left-[280px] top-16 h-[240px] w-[190px] border-l-4 border-[#9B511F] bg-white p-1">
-              <img
-                src="https://images.unsplash.com/photo-1600180758890-6b94519a8ba6?auto=format&fit=crop&w=400&q=80"
-                alt="Team members"
-                className="h-full w-full object-cover"
-              />
-            </div>
+          <div>
+            <Image src={innovation} alt="innovation"/>
           </div>
 
           <div>
-            <p className="text-sm font-medium text-black">Who we are</p>
-            <h2 className="mt-3 font-serif text-3xl leading-snug text-black md:text-4xl">
+            <p className="text-[20px] font-medium text-black">Who we are</p>
+            <h2 className="mt-3 font-serif text-3xl leading-snug text-black md:text-[44px]">
               Cyntonisca fuels innovation
             </h2>
-            <p className="mt-5 text-[15px] leading-relaxed text-black">
+            <p className="mt-5 text-[17px] leading-relaxed text-black">
               At Cyntonisca, we are not building for ourselves, we are
               building for you. That&apos;s why we are building one firm at a
               time. Our intention is to build according to what suits you and
               not the other way round.
             </p>
-            <p className="mt-4 text-[15px] leading-relaxed text-black">
+            <p className="mt-4 text-[17px] leading-relaxed text-black">
               At Cyntonisca, we are well aware of our root as Africans,
               specifically, Nigerians. We understand that what works in the
               North does not always apply in the South. Our focus is on
               building custom-made applications tailored to the Nigerian
               Legal System.
             </p>
+            <Link href={"/contact"}>
             <button className="mt-6 rounded-md bg-[#9B511F] px-6 py-2.5 text-[15px] font-medium text-white transition-colors hover:bg-[#7A3F17]">
               Get In Touch
             </button>
+            </Link>
           </div>
         </div>
 
