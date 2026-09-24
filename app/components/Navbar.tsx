@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import logo from "../../public/images/logo.png"
+import logo from "../../public/images/logo.webp"
 import Image from "next/image";
 
 const links = [
@@ -22,10 +22,10 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/95 backdrop-blur">
-      <nav className="mx-auto flex max-w-[95%] items-center justify-between px-6 py-3 md:px-10">
+      <nav className="mx-auto flex max-w-[95%] items-center justify-between py-3">
         <div className="flex gap-5">
           <Link href={"/"} className="shrink-0" aria-label="Cyntonisca home">
-            <Image src={logo} alt="logo" className="w-[56px] h-[56px]" />
+            <Image src={logo} alt="logo" className="w-[90px] h-[56px]" />
           </Link>
 
           <ul className="hidden items-center gap-9 md:flex">

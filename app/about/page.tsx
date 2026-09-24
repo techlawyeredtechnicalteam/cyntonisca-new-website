@@ -3,13 +3,15 @@
 import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import about from "../../public/images/about.jpg"
+import ceo from "../../public/images/ceo.jpg"
+import frontend from "../../public/images/frontend.jpeg"
 import innovation from "../../public/images/innovation.png"
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 
 type TeamMember = {
   name: string;
-  img: string;
+  img: StaticImageData;
   bio: string;
 };
 
@@ -24,28 +26,23 @@ type Testimonial = {
 const team: TeamMember[] = [
   {
     name: "Simbiat Lola, Founder & CEO",
-    img: "https://images.unsplash.com/photo-1600180758890-6b94519a8ba6?auto=format&fit=crop&w=600&q=80",
-    bio: "Simbiat Lola is the founder and CEO of Cyntonisca Nig Ltd, established in 2023. As both a lawyer and legal technologist, she is focused on using technology to improve how legal services work in Nigeria and to expand access to justice.",
+    img: ceo,
+    bio: "Simbiat A. Lola Founder & CEO, Cyntonisca Ltd | Lawyer | Legal Technologist | Systems Architect Simbiat A. Lola is a lawyer, legal technologist and systems architect, and the Founder & CEO of Cyntonisca Ltd, a legal technology company focused on bridging the gap between law and technology through innovative digital solutions.With a background spanning law, software engineering, legal technology and digital systems, Simbiat works at the intersection of legal practice and emerging technology. Her work focuses on developing technology-driven solutions that improve how legal professionals work, collaborate, manage information and deliver services. She is particularly passionate about the role of technology in transforming Africa’s legal ecosystem and building digital infrastructure that is accessible, secure and fit for the future.Through Cyntonisca, she has led initiatives supporting law firms, lawyers and legal organisations with digital tools, websites, legal technology solutions and professional development. Simbiat is also actively involved in research and conversations around artificial intelligence, AI governance, digital transformation, algorithmic justice and the future of the legal profession.She is committed to ensuring that Africa is not merely a consumer of emerging technologies but an active participant in shaping the systems, policies and infrastructure that will define the digital future. Beyond Cyntonisca, she contributes to professional and community initiatives within the legal sector and is passionate about empowering young lawyers with the knowledge and tools needed to thrive in an increasingly technology- driven world. Her work is driven by a simple vision: to bridge law, technology and innovation to create a smarter, more connected and future - ready legal ecosystem.",
   },
   {
-    name: "Jonah Emmanuel, Snr Frontend Developer",
-    img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=600&q=80",
-    bio: "As a Frontend Developer, I've had the opportunity to build and scale user-facing applications with a strong focus on performance, accessibility, and seamless user experiences. I specialize in technologies like React, TypeScript, Tailwind CSS.",
+    name: "Emmanuel Oyeyipo, Frontend Developer",
+    img: frontend,
+    bio: "Emmanuel is a Frontend Engineer dedicated to turning complex ideas into seamless, high-performance digital experiences. With over 3 years of experience, I specialize in building scalable web applications using React, Next.js, and TypeScript. His approach combines clean, maintainable code with a sharp eye for UI/UX. Whether it's an AI-integrated tool or a high-traffic e-commerce platform to architecting intricate admin dashboards, I focus on optimizing for speed, accessibility, and an intuitive user journey. He does not just build interfaces; he build solutions that challenge the status quo.",
   },
   {
     name: "Adams Muhammed, Backend Developer",
-    img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=600&q=80",
+    img: frontend,
     bio: "I'm a passionate software engineer with experience specializing in backend development. I love working extensively with Node.js, Postgres, and building resilient APIs that scale.",
   },
   {
     name: "Chioma Eze, Product Designer",
-    img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=600&q=80",
+    img: frontend,
     bio: "Chioma leads product design at Cyntonisca, shaping how legal professionals experience our tools. She believes good design should feel invisible and just work.",
-  },
-  {
-    name: "Tunde Bakare, Legal Ops Lead",
-    img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80",
-    bio: "Tunde bridges the gap between legal practice and product, ensuring every feature we ship actually solves a real problem lawyers face day to day.",
   },
 ];
 
@@ -175,7 +172,7 @@ export default function AboutSections() {
       <section className="mx-auto max-w-[95%] px-6 py-20 md:px-10">
         <div className="grid gap-12 md:grid-cols-2 md:items-center">
           <div>
-            <Image src={innovation} alt="innovation"/>
+            <Image src={innovation} alt="innovation" />
           </div>
 
           <div>
@@ -197,16 +194,16 @@ export default function AboutSections() {
               Legal System.
             </p>
             <Link href={"/contact"}>
-            <button className="mt-6 rounded-md bg-[#9B511F] px-6 py-2.5 text-[15px] font-medium text-white transition-colors hover:bg-[#7A3F17]">
-              Get In Touch
-            </button>
+              <button className="mt-6 rounded-md bg-[#9B511F] cursor-pointer px-6 py-2.5 text-[15px] font-medium text-white transition-colors hover:bg-[#7A3F17]">
+                Get In Touch
+              </button>
             </Link>
           </div>
         </div>
 
         {/* Our Vision */}
-        <div className="mx-auto mt-16 max-w-3xl rounded-[16px] bg-white px-10 py-14 text-center shadow-sm">
-          <p className="text-sm font-medium text-black">Our Vision</p>
+        <div className="mx-auto mt-16 max-w-3xl rounded-[10px] bg-white px-10 py-14 text-center shadow-md">
+          <p className="text-md font-medium text-black">Our Vision</p>
           <h3 className="mt-3 font-serif text-3xl text-black md:text-4xl">
             Advancing Legal Practice
           </h3>
@@ -256,13 +253,13 @@ export default function AboutSections() {
             >
               <div className="absolute -bottom-2.5 -left-2.5 h-full w-full bg-[#9B511F]" />
               <div className="relative overflow-hidden bg-black">
-                <img
+                <Image
                   src={member.img}
                   alt={member.name}
                   className="h-[560px] w-full object-cover opacity-90"
                 />
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent p-6">
-                  <p className="line-clamp-3 text-sm text-white/90">
+                  <p className="line-clamp-8 text-sm text-white/90">
                     {member.bio}
                     <span className="cursor-pointer text-white"> ...see more</span>
                   </p>
@@ -276,25 +273,27 @@ export default function AboutSections() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-[95%] px-6 pb-24 md:px-10">
+      <section className="mx-auto w-full max-w-[1400px] px-4 pb-20 sm:px-6 md:px-10 md:pb-24">
         <div className="text-center">
           <p className="text-sm font-medium text-black">What our Clients say</p>
-          <h2 className="mt-3 font-serif text-3xl text-black md:text-4xl">
+
+          <h2 className="mt-3 font-serif text-2xl text-black sm:text-3xl md:text-4xl">
             Don&apos;t Take Our Words for it
           </h2>
         </div>
 
-        <div className="mt-10 flex items-center justify-center gap-4">
+        <div className="mt-8 flex items-center justify-center gap-2 overflow-hidden px-2 sm:mt-10 sm:gap-4">
           {testimonials.map((t, i) => {
             const isActive = i === testimonialIndex;
+
             return (
               <button
                 key={t.name}
                 onClick={() => setActiveTestimonial(i)}
                 aria-label={`Show testimonial from ${t.name}`}
-                className={`shrink-0 overflow-hidden rounded-lg border-2 transition-all ${isActive
-                  ? "h-40 w-40 border-[#9B511F]"
-                  : "h-24 w-24 border-transparent"
+                className={`shrink-0 overflow-hidden rounded-lg border-2 transition-all duration-300 ${isActive
+                    ? "h-20 w-20 border-[#9B511F] sm:h-28 sm:w-28 md:h-40 md:w-40"
+                    : "h-14 w-14 border-transparent sm:h-20 sm:w-20 md:h-24 md:w-24"
                   }`}
               >
                 <img
@@ -309,24 +308,33 @@ export default function AboutSections() {
 
         <div
           ref={testimonialTrackRef}
-          className="mt-10 flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth px-6 pb-4 sm:px-20 md:px-32 lg:px-48 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-1 pb-4 sm:mt-10 sm:gap-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {testimonials.map((t) => (
             <div
               key={t.name}
               data-testimonial
-              className="flex w-full shrink-0 snap-center overflow-hidden rounded-2xl border border-gray-200 bg-white"
+              className="flex w-full min-w-0 shrink-0 snap-center flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white md:flex-row"
             >
-              <div className="flex w-[220px] shrink-0 flex-col justify-center gap-1 p-6">
+              <div className="flex w-full shrink-0 flex-row items-center gap-4 p-5 sm:p-6 md:w-[220px] md:flex-col md:items-start md:justify-center md:gap-1">
                 <img
                   src={t.avatar}
                   alt={t.name}
-                  className="h-12 w-12 rounded-full object-cover"
+                  className="h-12 w-12 shrink-0 rounded-full object-cover sm:h-14 sm:w-14 md:h-12 md:w-12"
                 />
-                <p className="mt-2 font-serif text-lg text-black">{t.name}</p>
-                <p className="text-sm text-[#616161]">{t.role}</p>
+
+                <div>
+                  <p className="font-serif text-base text-black sm:text-lg">
+                    {t.name}
+                  </p>
+
+                  <p className="text-sm text-[#616161]">
+                    {t.role}
+                  </p>
+                </div>
               </div>
-              <div className="flex flex-1 flex-col justify-center gap-4 bg-[#F1F0F5] p-6">
+
+              <div className="flex min-w-0 flex-1 flex-col justify-center gap-4 bg-[#F1F0F5] p-5 sm:p-6 md:p-8">
                 <div className="flex gap-1">
                   {Array.from({ length: 5 }).map((_, s) => (
                     <Star
@@ -340,7 +348,8 @@ export default function AboutSections() {
                     />
                   ))}
                 </div>
-                <p className="text-[15px] leading-relaxed text-black">
+
+                <p className="text-sm leading-7 text-black sm:text-[15px]">
                   {t.quote}
                 </p>
               </div>
@@ -348,18 +357,19 @@ export default function AboutSections() {
           ))}
         </div>
 
-        <div className="mt-8 flex justify-center gap-3">
+        <div className="mt-6 flex justify-center gap-3 sm:mt-8">
           <button
             onClick={() => goTestimonial(-1)}
             aria-label="Previous testimonial"
-            className="flex h-11 w-11 items-center justify-center rounded-md bg-white text-black shadow-sm transition-colors hover:bg-gray-50"
+            className="flex h-10 w-10 items-center justify-center rounded-md bg-white text-black shadow-sm transition-colors hover:bg-gray-50 sm:h-11 sm:w-11"
           >
             <ChevronLeft size={20} />
           </button>
+
           <button
             onClick={() => goTestimonial(1)}
             aria-label="Next testimonial"
-            className="flex h-11 w-11 items-center justify-center rounded-md bg-[#9B511F] text-white transition-colors hover:bg-[#7A3F17]"
+            className="flex h-10 w-10 items-center justify-center rounded-md bg-[#9B511F] text-white transition-colors hover:bg-[#7A3F17] sm:h-11 sm:w-11"
           >
             <ChevronRight size={20} />
           </button>

@@ -81,14 +81,12 @@ export default function OurAdvantage({ image = advantage }: OurAdvantageProps) {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr_1fr] gap-8 items-stretch">
-          {/* Left column */}
           <div className="flex flex-col gap-8">
             {leftFeatures.map((f) => (
               <FeatureCard key={f.title} {...f} />
             ))}
           </div>
 
-          {/* Center image */}
           <div className="relative">
             <div className="absolute -bottom-3 -left-2 right-3 top-3 rounded-md" />
             <div className="relative w-full h-full min-h-[500px] rounded-md overflow-hidden">
@@ -102,7 +100,6 @@ export default function OurAdvantage({ image = advantage }: OurAdvantageProps) {
             </div>
           </div>
 
-          {/* Right column */}
           <div className="flex flex-col gap-8">
             {rightFeatures.map((f) => (
               <FeatureCard key={f.title} {...f} />
