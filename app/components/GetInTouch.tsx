@@ -1,49 +1,42 @@
-import React from "react";
-import { ArrowRight } from "lucide-react";
-import touch from "../../public/images/touch.jpg"
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { ArrowUpRight } from "lucide-react";
+import touch from "../../public/images/touch.jpg";
 
 export default function GetInTouch() {
-    return (
-        <section className="relative flex min-h-[515px] items-center justify-center overflow-hidden px-6 py-24 text-center">
-            <Image
-                src={touch}
-                alt=""
-                className="absolute inset-0 h-full w-full object-cover"
-            />
+  const pathname = usePathname();
 
-            <div className="absolute inset-0 bg-[rgba(46,30,20,0.72)]" />
+  if (pathname === "/contact") return null;
 
-            <div className="relative z-10 max-w-2xl">
-                <p className="mb-4 text-lg font-medium text-[#E8DDD0]">
-                    Get In Touch
-                </p>
+  return (
+    <section className="grid bg-[#0c2133] font-sans text-white lg:grid-cols-[1.1fr_0.9fr]">
+      <div className="flex flex-col justify-between px-6 py-20 sm:px-10 sm:py-24 lg:min-h-[620px] lg:px-16 lg:py-20 xl:px-20">
 
-                <h2
-                    className="mb-7 font-bold leading-tight text-[#FDFBF8]"
-                    style={{
-                        fontFamily: "'Playfair Display', serif",
-                        fontSize: "clamp(2.4rem, 5vw, 3.6rem)",
-                    }}
-                >
-                    Let's Talk Projects
-                </h2>
+        <div className="my-16">
+          <h2 className="max-w-[11ch] text-5xl font-medium leading-[0.98] tracking-[-0.06em] sm:text-6xl lg:text-7xl">
+            Better legal work starts with a conversation.
+          </h2>
+          <p className="mt-7 max-w-xl text-base leading-8 text-white/58">
+            Tell us what you are trying to improve, build, or simplify. We will help you identify a practical next step.
+          </p>
+        </div>
 
-                <p className="mb-10 text-[24px] leading-relaxed text-[#EDE4D9]">
-                    Thinking about a new project or need some guidance?
-                </p>
+        <div className="flex flex-col gap-4 border-t border-white/15 pt-7 sm:flex-row sm:items-center sm:justify-between">
+          <a href="mailto:info@cyntonisca.com" className="text-sm text-white/60 transition-colors hover:text-white">info@cyntonisca.com</a>
+          <Link href="/contact" className="group inline-flex items-center justify-between gap-8 bg-white px-6 py-4 text-sm font-semibold text-[#0c2133] transition-colors hover:bg-[#dce8ef]">
+            Book a consultation
+            <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </Link>
+        </div>
+      </div>
 
-                <Link href={"/contact"}
-                    className="group inline-flex items-center gap-2.5 rounded bg-[#9B511F] px-8 py-2 text-base font-medium text-white transition-colors duration-200 hover:bg-[#9C5217]"
-                >
-                    Get In Touch
-                    <ArrowRight
-                        size={18}
-                        className="transition-transform duration-200 group-hover:translate-x-1"
-                    />
-                </Link>
-            </div>
-        </section>
-    );
+      <div className="relative min-h-[430px] lg:min-h-[620px]">
+        <Image src={touch} alt="A professional handshake" fill sizes="(max-width: 1024px) 100vw, 45vw" className="object-cover grayscale" />
+        <div className="absolute inset-0 bg-[#17466b]/25" />
+      </div>
+    </section>
+  );
 }

@@ -17,105 +17,83 @@ export type ProjectMockup = {
 export type Project = {
   slug: string;
   name: string;
+  website: string;
+  image: string;
+  imageAlt: string;
   summary: string;
   paragraphs: string[];
-  mockup: ProjectMockup;
-  process: ProcessStep[];
+  services: string[];
+  outcomes: string[];
 };
 
 export const projects: Project[] = [
   {
-    slug: "tele-court",
-    name: "Tele Court",
+    slug: "rock-and-paper-lp",
+    name: "Rock & Paper LP",
+    website: "https://www.rockandpaperlp.com/",
+    image: "/images/projects/rock-and-paper-lp.png",
+    imageAlt: "Rock and Paper LP website homepage",
     summary:
-      "A virtual courtroom platform that removes the barriers of time, distance and cost from access to justice.",
+      "A refined digital presence for a commercial law practice built around clarity, credibility, and considered counsel.",
     paragraphs: [
-      "Tele Court is a pioneering technological platform designed to bridge the gap between traditional justice systems and the evolving needs of modern society.",
-      "We believe that everyone deserves equal access to legal services, regardless of their geographic location or financial means. By leveraging cutting-edge technology, we are able to create a virtual courtroom that eliminates the barriers of time, distance, and cost.",
+      "Cyntonisca developed a focused website for Rock & Paper LP that presents the firm, its expertise, and its approach through a calm and confident digital experience.",
+      "The engagement also covered the supporting infrastructure behind that presence, including professional email and domain management, so the firm's public-facing systems remain consistent and dependable.",
     ],
-    mockup: {
-      brand: "Tele Court",
-      navTone: "dark",
-      navItems: ["Home", "About Us", "Mission", "Public Hearing", "Register/Login"],
-      headline: "TELE COURT",
-      tagline:
-        "Tele Court is a pioneering technological platform designed to bridge the gap between traditional justice systems and the evolving needs of modern society. Our mission is to democratize access to justice by providing a secure, efficient, and affordable remote court experience.",
-      cta: "Get started",
-      ctaTone: "crimson",
-      bodyTone: "dark",
-    },
-    process: [
-      {
-        title: "Research",
-        description:
-          "We studied legal workflows, user needs, and compliance requirements to ensure the platform solves real courtroom and administrative challenges.",
-      },
-      {
-        title: "Wireframes & Prototyping",
-        description:
-          "We mapped user journeys and built interactive wireframes to validate structure, usability, and core features before development began.",
-      },
-      {
-        title: "Development",
-        description:
-          "The platform was engineered for performance, security, and scalability, translating approved designs into a robust, production-ready system.",
-      },
-      {
-        title: "Testing",
-        description:
-          "We conducted functional, usability, and security testing to ensure reliability, accuracy, and seamless user experiences across devices.",
-      },
-      {
-        title: "Launch",
-        description:
-          "After final validations, the platform was deployed with optimized performance, stability, and readiness for real-world legal use.",
-      },
+    services: [
+      "Website development",
+      "Email management",
+      "Domain management",
+    ],
+    outcomes: [
+      "A responsive website aligned with the firm's professional positioning",
+      "A clear path for prospective clients to understand and contact the practice",
+      "Managed email and domain infrastructure supporting daily operations",
     ],
   },
   {
-    slug: "legal-flow",
-    name: "Legal Flow",
+    slug: "justus-law",
+    name: "Justus Law",
+    website: "https://www.justus-law.com/",
+    image: "/images/projects/justus-law.png",
+    imageAlt: "Justus Law website homepage",
     summary:
-      "A modern legal practice management platform that centralizes case management, communication and collaboration in one workspace.",
+      "A confident, editorial website for an internationally minded Nigerian law firm handling complex matters.",
     paragraphs: [
-      "Legal Flow is a modern legal practice management platform designed to simplify how law firms, counsels, and legal teams work. It centralizes case management, communication, document handling, and collaboration into a single, secure workspace, enabling legal professionals to deliver efficient, organized, and responsive legal support anytime, anywhere.",
+      "Cyntonisca built a modern website for Justus Law that communicates the firm's cross-border outlook and makes its expertise, experience, and counsel easier to explore.",
+      "Alongside the website, we manage the firm's email and domain setup to provide a cohesive, professional foundation across its digital communications.",
     ],
-    mockup: {
-      brand: "Legal Flow",
-      navTone: "light",
-      navItems: ["About", "Features", "Why choose us", "Pricing", "Contact us"],
-      headline: "Deliver Legal Support",
-      tagline: "Anytime, anywhere",
-      cta: "Get Started",
-      ctaTone: "violet",
-      bodyTone: "slate",
-    },
-    process: [
-      {
-        title: "Research",
-        description:
-          "We studied real legal workflows, user roles, and compliance needs to understand how legal professionals manage cases, communication, and daily operations.",
-      },
-      {
-        title: "Wireframes & Prototyping",
-        description:
-          "We mapped user journeys and built wireframes to validate structure, permissions, and feature flow before committing to visual design and development.",
-      },
-      {
-        title: "Development",
-        description:
-          "The platform was developed with scalability, security, and performance in mind, translating approved designs into a robust, production-ready web application.",
-      },
-      {
-        title: "Testing",
-        description:
-          "We tested across user roles, devices, and key workflows to ensure accuracy, usability, and reliable system behavior.",
-      },
-      {
-        title: "Launch",
-        description:
-          "After final validation, Legal Flow was deployed with optimized performance and readiness for real-world legal practice.",
-      },
+    services: [
+      "Website development",
+      "Email management",
+      "Domain management",
+    ],
+    outcomes: [
+      "A strong digital expression of the firm's expertise and international outlook",
+      "Responsive access to the firm's practice information across devices",
+      "Professionally managed email and domain systems",
+    ],
+  },
+  {
+    slug: "the-royal-partners",
+    name: "The Royal Partners",
+    website: "https://the-royal-partners.vercel.app/",
+    image: "/images/projects/the-royal-partners.png",
+    imageAlt: "The Royal Partners website homepage",
+    summary:
+      "A polished and accessible website that gives a Lagos legal practice a distinctive, modern digital home.",
+    paragraphs: [
+      "Cyntonisca developed The Royal Partners' website to present the practice with greater clarity, balancing a premium visual identity with straightforward access to its people and practice areas.",
+      "We also support the email and domain systems behind the website, bringing the firm's core digital touchpoints into one coordinated setup.",
+    ],
+    services: [
+      "Website development",
+      "Email management",
+      "Domain management",
+    ],
+    outcomes: [
+      "A distinctive website that reflects the firm's positioning",
+      "Clearer presentation of services, people, and client pathways",
+      "Coordinated email and domain management",
     ],
   },
 ];

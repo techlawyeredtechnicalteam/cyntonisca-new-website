@@ -1,50 +1,34 @@
-import { Circle } from "lucide-react";
+import { ArrowUpRight, Circle, FileText, Users } from "lucide-react";
 import type { ProjectMockup } from "../data/project";
 
 export default function ProjectMockupCard({ mockup }: { mockup: ProjectMockup }) {
-  const ctaClass =
-    mockup.ctaTone === "crimson"
-      ? "bg-[#8a2b2b] text-white"
-      : "bg-[#6c3fd9] text-white";
+  const isDark = mockup.bodyTone === "dark";
+  const accent = mockup.ctaTone === "crimson" ? "#9f4046" : "#6558a8";
 
   return (
-    <div className="relative mx-auto w-full max-w-md">
-      <div className="absolute -left-4 -top-4 h-16 w-16 border-4 border-accent md:-left-6 md:-top-6" />
-      <div className="absolute -bottom-4 -right-4 h-16 w-16 border-4 border-accent md:-bottom-6 md:-right-6" />
-
-      <div className="relative overflow-hidden rounded-md border border-line bg-white shadow-xl">
-        <div
-          className={`flex items-center justify-between px-4 py-2.5 text-[11px] ${
-            mockup.navTone === "dark"
-              ? "bg-[#1c1712] text-white/90"
-              : "bg-white text-black/80"
-          }`}
-        >
-          <div className="flex items-center gap-1.5">
-            <Circle className="h-2 w-2 fill-current opacity-60" strokeWidth={0} />
-            <span className="font-serif text-xs">{mockup.brand}</span>
-          </div>
-          <div className="hidden gap-3 sm:flex">
-            {mockup.navItems.map((item) => (
-              <span key={item}>{item}</span>
-            ))}
-          </div>
+    <div className={`relative min-h-[420px] overflow-hidden p-5 sm:min-h-[520px] sm:p-9 ${isDark ? "bg-[#E8D5C7]" : "bg-[#ddd9ed]"}`}>
+      <div className="absolute -right-20 -top-20 h-72 w-72 rounded-full bg-white/45 blur-3xl" />
+      <div className="relative mx-auto mt-6 max-w-[660px] overflow-hidden border border-[#0c2133]/12 bg-white shadow-[0_25px_80px_rgba(8,27,43,0.22)] transition-transform duration-500 group-hover:-translate-y-2">
+        <div className={`flex items-center justify-between px-4 py-3 text-[9px] sm:px-6 ${mockup.navTone === "dark" ? "bg-[#101f2e] text-white" : "bg-white text-[#0c2133]"}`}>
+          <div className="flex items-center gap-2 font-semibold uppercase tracking-[0.14em]"><Circle className="h-2 w-2 fill-current" strokeWidth={0} />{mockup.brand}</div>
+          <div className="hidden items-center gap-4 opacity-60 sm:flex">{mockup.navItems.slice(0, 4).map((item) => <span key={item}>{item}</span>)}</div>
         </div>
 
-        <div className="relative h-64">
-          <div className="absolute inset-0 bg-black/25" />
-          <div className="absolute inset-x-0 bottom-0 p-4">
-            <p className="font-serif text-sm tracking-wide text-white">{mockup.headline}</p>
-            {mockup.tagline && (
-              <p className="mt-1 line-clamp-3 text-[11px] leading-relaxed text-white/85">
-                {mockup.tagline}
-              </p>
-            )}
-            <span
-              className={`mt-2 inline-block rounded px-3 py-1.5 text-[11px] font-medium ${ctaClass}`}
-            >
-              {mockup.cta}
-            </span>
+        <div className={`grid min-h-[330px] items-center gap-8 p-7 sm:grid-cols-[1.08fr_0.92fr] sm:p-10 ${isDark ? "bg-[#132a41] text-white" : "bg-[#f7f6fb] text-[#172033]"}`}>
+          <div>
+            <p className="text-[9px] font-semibold uppercase tracking-[0.2em] opacity-55">Modern legal work</p>
+            <h3 className="mt-5 text-3xl font-medium leading-[0.98] tracking-[-0.055em] sm:text-4xl">{mockup.headline}</h3>
+            {mockup.tagline && <p className="mt-5 line-clamp-4 text-[11px] leading-5 opacity-60">{mockup.tagline}</p>}
+            <span className="mt-6 inline-flex items-center gap-2 px-4 py-2.5 text-[10px] font-semibold text-white" style={{ backgroundColor: accent }}>{mockup.cta}<ArrowUpRight className="h-3 w-3" /></span>
+          </div>
+
+          <div className={`space-y-3 border p-4 ${isDark ? "border-white/12 bg-white/[0.05]" : "border-[#6558a8]/15 bg-white"}`}>
+            <div className="flex items-center justify-between border-b border-current/10 pb-3"><span className="text-[9px] font-semibold uppercase tracking-[0.14em] opacity-55">Workspace</span><span className="h-2 w-2 rounded-full bg-emerald-400" /></div>
+            <div className="grid grid-cols-2 gap-2">
+              <div className="border border-current/10 p-3"><FileText className="h-4 w-4 opacity-55" /><p className="mt-5 text-xl font-semibold">12</p><p className="mt-1 text-[8px] opacity-50">Active matters</p></div>
+              <div className="border border-current/10 p-3"><Users className="h-4 w-4 opacity-55" /><p className="mt-5 text-xl font-semibold">08</p><p className="mt-1 text-[8px] opacity-50">Team members</p></div>
+            </div>
+            {["Documents reviewed", "Next hearing", "Client updates"].map((item, index) => <div key={item} className="flex items-center justify-between py-1 text-[8px] opacity-55"><span>{item}</span><span>{index === 0 ? "24" : index === 1 ? "Today" : "06"}</span></div>)}
           </div>
         </div>
       </div>

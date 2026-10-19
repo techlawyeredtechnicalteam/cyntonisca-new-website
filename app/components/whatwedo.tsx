@@ -1,5 +1,4 @@
-import Image from "next/image";
-import { Code2, Smartphone, Scale, Mail, ArrowRight } from "lucide-react";
+import { Smartphone, Scale, Mail, ArrowRight } from "lucide-react";
 
 export default function Whatwedo() {
   return (

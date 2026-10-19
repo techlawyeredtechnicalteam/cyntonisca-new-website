@@ -1,380 +1,291 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
-import { ChevronLeft, ChevronRight, Star } from "lucide-react";
-import about from "../../public/images/about.jpg"
-import ceo from "../../public/images/ceo.jpg"
-import frontend from "../../public/images/frontend.jpeg"
-import innovation from "../../public/images/innovation.png"
-import Image, { StaticImageData } from "next/image";
+import type { Metadata } from "next";
+import Image, { type StaticImageData } from "next/image";
 import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+
+import ScrollReveal from "../components/ScrollReveal";
+import SectionLabel from "../components/SectionLabel";
+
+import aboutImage from "../../public/images/about.jpg";
+import approachImage from "../../public/images/about-approach.jpg";
+import ceoImage from "../../public/images/ceo.jpg";
+import frontendImage from "../../public/images/frontend.jpeg";
+import principlesImage from "../../public/images/touch.jpg";
+
+export const metadata: Metadata = {
+  title: "About Us | Cyntonisca",
+  description:
+    "Meet the people and principles behind Cyntonisca's thoughtful legal technology and digital services.",
+};
+
+const principles = [
+  {
+    number: "01",
+    title: "Clarity",
+    description:
+      "We turn complex requirements into focused decisions, practical systems, and digital experiences that are easy to use.",
+  },
+  {
+    number: "02",
+    title: "Context",
+    description:
+      "Every organisation works differently. We listen first, then shape each solution around the people and processes it serves.",
+  },
+  {
+    number: "03",
+    title: "Responsibility",
+    description:
+      "We treat trust, privacy, reliability, and long-term maintainability as core parts of the work—not finishing touches.",
+  },
+  {
+    number: "04",
+    title: "Commitment",
+    description:
+      "We stay close from strategy through delivery, bringing care, consistency, and accountability to every engagement.",
+  },
+];
 
 type TeamMember = {
   name: string;
-  img: StaticImageData;
-  bio: string;
-};
-
-type Testimonial = {
-  name: string;
   role: string;
-  avatar: string;
-  rating: number;
-  quote: string;
+  initials: string;
+  bio: string;
+  image?: StaticImageData;
 };
 
 const team: TeamMember[] = [
   {
-    name: "Simbiat Lola, Founder & CEO",
-    img: ceo,
-    bio: "Simbiat A. Lola Founder & CEO, Cyntonisca Ltd | Lawyer | Legal Technologist | Systems Architect Simbiat A. Lola is a lawyer, legal technologist and systems architect, and the Founder & CEO of Cyntonisca Ltd, a legal technology company focused on bridging the gap between law and technology through innovative digital solutions.With a background spanning law, software engineering, legal technology and digital systems, Simbiat works at the intersection of legal practice and emerging technology. Her work focuses on developing technology-driven solutions that improve how legal professionals work, collaborate, manage information and deliver services. She is particularly passionate about the role of technology in transforming Africa’s legal ecosystem and building digital infrastructure that is accessible, secure and fit for the future.Through Cyntonisca, she has led initiatives supporting law firms, lawyers and legal organisations with digital tools, websites, legal technology solutions and professional development. Simbiat is also actively involved in research and conversations around artificial intelligence, AI governance, digital transformation, algorithmic justice and the future of the legal profession.She is committed to ensuring that Africa is not merely a consumer of emerging technologies but an active participant in shaping the systems, policies and infrastructure that will define the digital future. Beyond Cyntonisca, she contributes to professional and community initiatives within the legal sector and is passionate about empowering young lawyers with the knowledge and tools needed to thrive in an increasingly technology- driven world. Her work is driven by a simple vision: to bridge law, technology and innovation to create a smarter, more connected and future - ready legal ecosystem.",
+    name: "Simbiat A. Lola",
+    role: "Founder & CEO",
+    initials: "SL",
+    image: ceoImage,
+    bio: "Simbiat A. Lola, Founder & CEO, Cyntonisca Ltd | Lawyer | Legal Technologist | Systems Architect. Simbiat A. Lola is a lawyer, legal technologist and systems architect, and the Founder & CEO of Cyntonisca Ltd, a legal technology company focused on bridging the gap between law and technology through innovative digital solutions.",
   },
   {
-    name: "Emmanuel Oyeyipo, Frontend Developer",
-    img: frontend,
-    bio: "Emmanuel is a Frontend Engineer dedicated to turning complex ideas into seamless, high-performance digital experiences. With over 3 years of experience, I specialize in building scalable web applications using React, Next.js, and TypeScript. His approach combines clean, maintainable code with a sharp eye for UI/UX. Whether it's an AI-integrated tool or a high-traffic e-commerce platform to architecting intricate admin dashboards, I focus on optimizing for speed, accessibility, and an intuitive user journey. He does not just build interfaces; he build solutions that challenge the status quo.",
+    name: "Adams Muhammed",
+    role: "Chief Technical Officer",
+    initials: "AM",
+    bio: "Adams is a passionate software engineer specialising in backend development. He works extensively with Node.js and PostgreSQL, building resilient APIs and dependable systems that scale.",
   },
   {
-    name: "Adams Muhammed, Backend Developer",
-    img: frontend,
-    bio: "I'm a passionate software engineer with experience specializing in backend development. I love working extensively with Node.js, Postgres, and building resilient APIs that scale.",
+    name: "Emmanuel Oyeyipo",
+    role: "Software Engineer",
+    initials: "EO",
+    image: frontendImage,
+    bio: "Emmanuel is a software engineer dedicated to turning complex ideas into seamless, high-performance digital experiences. With over three years of experience, he specialises in building scalable web applications using React, Next.js and TypeScript. He does not just build interfaces; he builds solutions that challenge the status quo.",
   },
   {
-    name: "Chioma Eze, Product Designer",
-    img: frontend,
-    bio: "Chioma leads product design at Cyntonisca, shaping how legal professionals experience our tools. She believes good design should feel invisible and just work.",
+    name: "Chioma Eze",
+    role: "Product Designer",
+    initials: "CE",
+    bio: "Chioma leads product design at Cyntonisca, shaping how legal professionals experience our tools. She believes good design should feel invisible and simply work.",
   },
 ];
 
-const testimonials: Testimonial[] = [
-  {
-    name: "Sandra Ayomikun",
-    role: "Lead Coach",
-    avatar:
-      "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80",
-    rating: 5,
-    quote:
-      "We needed a secure virtual court solution, and Cyntonisca delivered beyond expectations. Smooth, intuitive, and reliable.",
-  },
-  {
-    name: "Tunde Akinwale",
-    role: "LegalTech Consultant",
-    avatar:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=200&q=80",
-    rating: 4,
-    quote:
-      "Thanks to Cyntonisca, our processes are now digitized and easier for the public to access.",
-  },
-  {
-    name: "Ifeoma Okoro",
-    role: "Managing Partner",
-    avatar:
-      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80",
-    rating: 5,
-    quote:
-      "Their team understood our workflow from day one. The final product felt tailor-made for a Nigerian law firm.",
-  },
-  {
-    name: "Bayo Adekunle",
-    role: "Compliance Officer",
-    avatar:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80",
-    rating: 5,
-    quote:
-      "Rollout was fast and support was responsive whenever we hit a snag. Exactly what we needed.",
-  },
-  {
-    name: "Ngozi Umeh",
-    role: "Operations Director",
-    avatar:
-      "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?auto=format&fit=crop&w=200&q=80",
-    rating: 4,
-    quote:
-      "Cyntonisca made our transition to digital filing painless. Our clients notice the difference too.",
-  },
-  {
-    name: "Emeka Chukwu",
-    role: "Founder, Chukwu & Co",
-    avatar:
-      "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=200&q=80",
-    rating: 5,
-    quote:
-      "A genuinely reliable partner. They think like lawyers, not just developers, and it shows in the product.",
-  },
-  {
-    name: "Amaka Nwosu",
-    role: "Litigation Associate",
-    avatar:
-      "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?auto=format&fit=crop&w=200&q=80",
-    rating: 5,
-    quote:
-      "Everything from onboarding to daily use has been smooth. It's rare to find legal tech this well thought out.",
-  },
-];
-
-export default function AboutSections() {
-  const teamRef = useRef<HTMLDivElement>(null);
-  const testimonialTrackRef = useRef<HTMLDivElement>(null);
-  const [testimonialIndex, setTestimonialIndex] = useState(3);
-
-  const scrollTeam = (dir: 1 | -1) => {
-    const el = teamRef.current;
-    if (!el) return;
-    const card = el.querySelector<HTMLDivElement>("[data-card]");
-    const gap = 24;
-    const width = card ? card.offsetWidth + gap : 320;
-    el.scrollBy({ left: dir * width, behavior: "smooth" });
-  };
-
-  const scrollToTestimonial = (index: number, behavior: ScrollBehavior) => {
-    const el = testimonialTrackRef.current;
-    if (!el) return;
-    const cards = el.querySelectorAll<HTMLDivElement>("[data-testimonial]");
-    cards[index]?.scrollIntoView({ behavior, inline: "center", block: "nearest" });
-  };
-
-  const setActiveTestimonial = (index: number) => {
-    setTestimonialIndex(index);
-    scrollToTestimonial(index, "smooth");
-  };
-
-  const goTestimonial = (dir: 1 | -1) => {
-    setActiveTestimonial(
-      (testimonialIndex + dir + testimonials.length) % testimonials.length
-    );
-  };
-
-  useEffect(() => {
-    scrollToTestimonial(testimonialIndex, "auto");
-  }, []);
-
+export default function AboutPage() {
   return (
-    <div className="bg-[#F1F1F1] text-black">
-      <section className="relative flex flex-col items-center justify-center min-h-[400px] w-full overflow-hidden">
-        <Image
-          src={about}
-          alt="about"
-          className="absolute inset-0 h-full w-full object-cover"
-        />
+    <main className="overflow-hidden text-[#0b2133]">
+      <section className=" px-5 sm:px-8 lg:px-12 ">
+        <div className="mx-auto max-w-[1480px] pt-16">
+          <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-20">
+            <ScrollReveal>
+              <h1 className="text-3xl font-medium leading-[0.96] tracking-[-0.065em] sm:text-4xl lg:text-5xl xl:text-[68px]">
+                A thoughtful approach to legal technology.
+              </h1>
+            </ScrollReveal>
 
-        <div className="absolute inset-0 bg-[rgba(28,20,14,0.55)]"></div>
-        <div className="relative z-10 mx-auto max-w-[50%] px-6 py-12 text-center text-white">
-          <p className="mb-3 text-base text-white/90">About us</p>
-          <h1 className="mb-5 font-serif text-4xl leading-tight sm:text-5xl md:text-6xl">
-            Bridging Law and Tech
-          </h1>
-          <p className="text-base leading-relaxed text-white/85">
-            Founded by legal technology enthusiasts, we understand the unique challenges law firms face in today's digital age. Our mission is to revolutionize the legal industry in Nigeria with tailored tech solutions.
-          </p>
+            <ScrollReveal delay={120} className="lg:pb-3">
+              <p className="max-w-xl text-lg leading-8 text-[#45596a] sm:text-xl sm:leading-9">
+                We combine legal understanding, product thinking, and dependable
+                technology to help modern organisations work with greater clarity
+                and confidence.
+              </p>
+            </ScrollReveal>
+          </div>
+
+          <ScrollReveal
+            delay={80}
+            className="relative mt-12 h-[52svh] min-h-[400px] overflow-hidden rounded-[1.5rem] bg-[#cad6dd] sm:mt-16 sm:h-[60svh] sm:min-h-[520px] sm:rounded-[2rem] lg:mt-20 lg:h-[66svh] lg:max-h-[760px]"
+          >
+            <Image
+              src={aboutImage}
+              alt="A Cyntonisca professional working with a tablet"
+              fill
+              preload
+              placeholder="blur"
+              sizes="(max-width: 768px) 100vw, 94vw"
+              className="object-cover object-center"
+            />
+          </ScrollReveal>
         </div>
       </section>
 
-      <section className="mx-auto max-w-[95%] px-6 py-20 md:px-10">
-        <div className="grid gap-12 md:grid-cols-2 md:items-center">
-          <div>
-            <Image src={innovation} alt="innovation" />
-          </div>
+      <section
+        id="our-approach"
+        className="bg-[#dce8ef] px-5 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-36"
+      >
+        <div className="mx-auto grid max-w-[1480px] gap-12 lg:grid-cols-[0.72fr_1.28fr] lg:items-stretch lg:gap-20">
+          <ScrollReveal className="relative min-h-[440px] overflow-hidden rounded-[1.5rem] bg-[#c6d6df] sm:min-h-[620px] sm:rounded-[2rem] lg:min-h-[720px]">
+            <Image
+              src={approachImage}
+              alt="A Cyntonisca professional working on a laptop"
+              fill
+              placeholder="blur"
+              sizes="(max-width: 1024px) 100vw, 38vw"
+              className="object-cover object-center"
+            />
+          </ScrollReveal>
 
-          <div>
-            <p className="text-[20px] font-medium text-black">Who we are</p>
-            <h2 className="mt-3 font-serif text-3xl leading-snug text-black md:text-[44px]">
-              Cyntonisca fuels innovation
+          <ScrollReveal
+            delay={100}
+            className="flex flex-col justify-center lg:py-8"
+          >
+            <SectionLabel>Our approach</SectionLabel>
+            <h2 className="mt-6 max-w-4xl text-[clamp(2.65rem,5.2vw,6rem)] font-medium leading-[0.98] tracking-[-0.05em]">
+              A disciplined process, shaped around every organisation.
             </h2>
-            <p className="mt-5 text-[17px] leading-relaxed text-black">
-              At Cyntonisca, we are not building for ourselves, we are
-              building for you. That&apos;s why we are building one firm at a
-              time. Our intention is to build according to what suits you and
-              not the other way round.
-            </p>
-            <p className="mt-4 text-[17px] leading-relaxed text-black">
-              At Cyntonisca, we are well aware of our root as Africans,
-              specifically, Nigerians. We understand that what works in the
-              North does not always apply in the South. Our focus is on
-              building custom-made applications tailored to the Nigerian
-              Legal System.
-            </p>
-            <Link href={"/contact"}>
-              <button className="mt-6 rounded-md bg-[#9B511F] cursor-pointer px-6 py-2.5 text-[15px] font-medium text-white transition-colors hover:bg-[#7A3F17]">
-                Get In Touch
-              </button>
+
+            <div className="mt-8 grid max-w-4xl gap-5 text-base leading-7 text-[#45596a] sm:text-lg sm:leading-8 xl:grid-cols-2 xl:gap-10">
+              <p>
+                We start by understanding the real operational challenge: who is
+                involved, what creates friction, and what a better outcome needs
+                to feel like.
+              </p>
+              <p>
+                From there, strategy, design, engineering, and ongoing support
+                move as one connected process. The result is useful technology
+                built for the way your team actually works.
+              </p>
+            </div>
+
+            <Link
+              href="/services"
+              className="group mt-10 inline-flex w-fit items-center gap-2 border-b border-[#0b2133] pb-1 text-sm font-semibold uppercase tracking-[0.12em] transition-colors hover:text-[#245e85]"
+            >
+              Explore our services
+              <ArrowUpRight
+                aria-hidden="true"
+                className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+              />
             </Link>
-          </div>
-        </div>
-
-        {/* Our Vision */}
-        <div className="mx-auto mt-16 max-w-3xl rounded-[10px] bg-white px-10 py-14 text-center shadow-md">
-          <p className="text-md font-medium text-black">Our Vision</p>
-          <h3 className="mt-3 font-serif text-3xl text-black md:text-4xl">
-            Advancing Legal Practice
-          </h3>
-          <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-[#616161]">
-            To be Nigeria&apos;s leading legal technology solutions provider,
-            empowering law firms to thrive in the digital era while
-            maintaining professional excellence.
-          </p>
+          </ScrollReveal>
         </div>
       </section>
 
-      <section className="mx-auto max-w-[95%] px-6 pb-20 md:px-10">
-        <div className="flex items-end justify-between">
-          <div>
-            <p className="text-sm font-medium text-black">Meet the Team</p>
-            <h2 className="mt-3 font-serif text-3xl text-black md:text-4xl">
-              Our Powerhouse
+      <section className="relative min-h-[900px] overflow-hidden bg-[#071521] px-5 py-24 text-white sm:px-8 sm:py-32 lg:px-12 lg:py-40">
+        <Image
+          src={principlesImage}
+          alt="Two professionals shaking hands"
+          fill
+          placeholder="blur"
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-[#071d31]/85" />
+
+        <div className="relative mx-auto grid max-w-[1480px] gap-14 lg:grid-cols-[0.85fr_1.15fr] lg:gap-24">
+          <ScrollReveal>
+            <SectionLabel light>Our principles</SectionLabel>
+            <h2 className="mt-6 max-w-2xl text-[clamp(2.8rem,5.5vw,6.3rem)] font-medium leading-[0.98] tracking-[-0.05em]">
+              The principles that guide our work.
             </h2>
-          </div>
-          <div className="flex shrink-0 gap-3">
-            <button
-              onClick={() => scrollTeam(-1)}
-              aria-label="Previous team member"
-              className="flex h-11 w-11 items-center justify-center rounded-md bg-white text-black shadow-sm transition-colors hover:bg-gray-50"
-            >
-              <ChevronLeft size={20} />
-            </button>
-            <button
-              onClick={() => scrollTeam(1)}
-              aria-label="Next team member"
-              className="flex h-11 w-11 items-center justify-center rounded-md bg-[#9B511F] text-white transition-colors hover:bg-[#7A3F17]"
-            >
-              <ChevronRight size={20} />
-            </button>
-          </div>
-        </div>
+          </ScrollReveal>
 
-        <div
-          ref={teamRef}
-          className="mt-10 flex snap-x snap-mandatory gap-9 overflow-x-auto scroll-smooth pb-3 pl-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        >
-          {team.map((member) => (
-            <div
-              key={member.name}
-              data-card
-              className="relative w-[calc(33.333%-24px)] min-w-[340px] shrink-0 snap-start"
-            >
-              <div className="absolute -bottom-2.5 -left-2.5 h-full w-full bg-[#9B511F]" />
-              <div className="relative overflow-hidden bg-black">
-                <Image
-                  src={member.img}
-                  alt={member.name}
-                  className="h-[560px] w-full object-cover opacity-90"
-                />
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent p-6">
-                  <p className="line-clamp-8 text-sm text-white/90">
-                    {member.bio}
-                    <span className="cursor-pointer text-white"> ...see more</span>
+          <div className="space-y-4 lg:pt-20">
+            {principles.map((principle, index) => (
+              <ScrollReveal key={principle.title} delay={index * 60}>
+                <article className="grid gap-6 rounded-[1.4rem] border border-white/15 bg-white/[0.08] p-6 backdrop-blur-md transition-colors duration-300 hover:bg-white/[0.13] sm:grid-cols-[70px_1fr] sm:p-8 lg:p-10">
+                  <p className="text-sm font-semibold tracking-[0.14em] text-[#9bc6e2]">
+                    {principle.number}
                   </p>
-                  <p className="mt-3 text-[15px] font-medium text-white">
-                    {member.name}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
+                  <div>
+                    <h3 className="text-2xl font-medium tracking-[-0.025em] sm:text-3xl">
+                      {principle.title}
+                    </h3>
+                    <p className="mt-3 max-w-2xl leading-7 text-white/70">
+                      {principle.description}
+                    </p>
+                  </div>
+                </article>
+              </ScrollReveal>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-[1400px] px-4 pb-20 sm:px-6 md:px-10 md:pb-24">
-        <div className="text-center">
-          <p className="text-sm font-medium text-black">What our Clients say</p>
+      <section className="bg-[#f4f3ef] px-5 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-36">
+        <div className="mx-auto max-w-[1480px]">
+          <div className="grid gap-8 border-b border-[#0b2133]/20 pb-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-end lg:gap-20 lg:pb-16">
+            <ScrollReveal>
+              <SectionLabel>Our team</SectionLabel>
+              <h2 className="mt-6 max-w-3xl text-[clamp(2.8rem,5.5vw,6.2rem)] font-medium leading-[0.98] tracking-[-0.05em]">
+                The people behind the work.
+              </h2>
+            </ScrollReveal>
 
-          <h2 className="mt-3 font-serif text-2xl text-black sm:text-3xl md:text-4xl">
-            Don&apos;t Take Our Words for it
-          </h2>
-        </div>
-
-        <div className="mt-8 flex items-center justify-center gap-2 overflow-hidden px-2 sm:mt-10 sm:gap-4">
-          {testimonials.map((t, i) => {
-            const isActive = i === testimonialIndex;
-
-            return (
-              <button
-                key={t.name}
-                onClick={() => setActiveTestimonial(i)}
-                aria-label={`Show testimonial from ${t.name}`}
-                className={`shrink-0 overflow-hidden rounded-lg border-2 transition-all duration-300 ${isActive
-                    ? "h-20 w-20 border-[#9B511F] sm:h-28 sm:w-28 md:h-40 md:w-40"
-                    : "h-14 w-14 border-transparent sm:h-20 sm:w-20 md:h-24 md:w-24"
-                  }`}
+            <ScrollReveal delay={100} className="lg:pb-2">
+              <p className="max-w-xl text-lg leading-8 text-[#45596a]">
+                A collaborative team of strategists, designers, developers, and
+                legal-minded problem solvers committed to useful, lasting work.
+              </p>
+              <Link
+                href="/careers"
+                className="group mt-7 inline-flex items-center gap-2 border-b border-[#0b2133] pb-1 text-sm font-semibold uppercase tracking-[0.12em] transition-colors hover:text-[#245e85]"
               >
-                <img
-                  src={t.avatar}
-                  alt={t.name}
-                  className="h-full w-full object-cover"
+                Work with us
+                <ArrowUpRight
+                  aria-hidden="true"
+                  className="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                 />
-              </button>
-            );
-          })}
-        </div>
+              </Link>
+            </ScrollReveal>
+          </div>
 
-        <div
-          ref={testimonialTrackRef}
-          className="mt-8 flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth px-1 pb-4 sm:mt-10 sm:gap-6 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        >
-          {testimonials.map((t) => (
-            <div
-              key={t.name}
-              data-testimonial
-              className="flex w-full min-w-0 shrink-0 snap-center flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white md:flex-row"
-            >
-              <div className="flex w-full shrink-0 flex-row items-center gap-4 p-5 sm:p-6 md:w-[220px] md:flex-col md:items-start md:justify-center md:gap-1">
-                <img
-                  src={t.avatar}
-                  alt={t.name}
-                  className="h-12 w-12 shrink-0 rounded-full object-cover sm:h-14 sm:w-14 md:h-12 md:w-12"
-                />
-
-                <div>
-                  <p className="font-serif text-base text-black sm:text-lg">
-                    {t.name}
-                  </p>
-
-                  <p className="text-sm text-[#616161]">
-                    {t.role}
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex min-w-0 flex-1 flex-col justify-center gap-4 bg-[#F1F0F5] p-5 sm:p-6 md:p-8">
-                <div className="flex gap-1">
-                  {Array.from({ length: 5 }).map((_, s) => (
-                    <Star
-                      key={s}
-                      size={18}
-                      className={
-                        s < t.rating
-                          ? "fill-[#F2B237] text-[#F2B237]"
-                          : "fill-gray-200 text-black"
-                      }
-                    />
-                  ))}
-                </div>
-
-                <p className="text-sm leading-7 text-black sm:text-[15px]">
-                  {t.quote}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-6 flex justify-center gap-3 sm:mt-8">
-          <button
-            onClick={() => goTestimonial(-1)}
-            aria-label="Previous testimonial"
-            className="flex h-10 w-10 items-center justify-center rounded-md bg-white text-black shadow-sm transition-colors hover:bg-gray-50 sm:h-11 sm:w-11"
-          >
-            <ChevronLeft size={20} />
-          </button>
-
-          <button
-            onClick={() => goTestimonial(1)}
-            aria-label="Next testimonial"
-            className="flex h-10 w-10 items-center justify-center rounded-md bg-[#9B511F] text-white transition-colors hover:bg-[#7A3F17] sm:h-11 sm:w-11"
-          >
-            <ChevronRight size={20} />
-          </button>
+          <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:mt-14 lg:grid-cols-4 lg:gap-5">
+            {team.map((member, index) => (
+              <ScrollReveal key={member.name} delay={index * 60}>
+                <article className="group">
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] bg-[#dce8ef]">
+                    {member.image ? (
+                      <Image
+                        src={member.image}
+                        alt={member.name}
+                        fill
+                        placeholder="blur"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                        className="object-cover object-center grayscale-[20%] transition duration-700 group-hover:scale-[1.025] group-hover:grayscale-0"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex items-end bg-[linear-gradient(145deg,#d9e7ee_0%,#afc5d2_100%)] p-7">
+                        <span className="text-[clamp(4rem,8vw,7rem)] font-medium leading-none tracking-[-0.07em] text-[#0b2133]/16">
+                          {member.initials}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                  <h3 className="mt-5 text-xl font-medium tracking-[-0.025em]">
+                    {member.name}
+                  </h3>
+                  <p className="mt-1 text-sm text-[#536675]">{member.role}</p>
+                  <details className="group/bio mt-5 border-t border-[#0b2133]/15 pt-4">
+                    <summary className="flex cursor-pointer list-none items-center justify-between gap-4 text-sm font-semibold uppercase tracking-[0.1em] text-[#234e70] [&::-webkit-details-marker]:hidden">
+                      <span className="group-open/bio:hidden">Read bio</span>
+                      <span className="hidden group-open/bio:inline">Close bio</span>
+                      <span
+                        aria-hidden="true"
+                        className="relative h-4 w-4 shrink-0 before:absolute before:left-0 before:top-1/2 before:h-px before:w-4 before:-translate-y-1/2 before:bg-current after:absolute after:left-1/2 after:top-0 after:h-4 after:w-px after:-translate-x-1/2 after:bg-current after:transition-transform group-open/bio:after:rotate-90"
+                      />
+                    </summary>
+                    <p className="mt-4 text-[0.95rem] leading-7 text-[#45596a]">
+                      {member.bio}
+                    </p>
+                  </details>
+                </article>
+              </ScrollReveal>
+            ))}
+          </div>
         </div>
       </section>
-    </div>
+    </main>
   );
 }
